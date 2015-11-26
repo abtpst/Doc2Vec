@@ -10,6 +10,7 @@ def myhash(obj):
 
 model = doc2vec.Doc2Vec(hashfxn=myhash)
 
+#Load the model we trained earlier
 model = doc2vec.Doc2Vec.load("../../classifier/Doc2VectforNLPTraining")
 
 print(type(model.syn0))
