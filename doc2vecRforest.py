@@ -12,19 +12,19 @@ def myhash(obj):
     
 def main():
 
+    #Set up logging configurations
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
     
     model = doc2vec.Doc2Vec(hashfxn=myhash)
 
+    #Load the trained model
     model = doc2vec.Doc2Vec.load("../../classifier/Doc2VectforNLPTraining")
-
-    # model.init_sims(replace=True)
 
     word_vectors = model.syn0
       
     num_clusters = int(word_vectors.shape[0] / 5)
     # print("number of clusters: {}".format(num_clusters))
-    # input("Press enter to continue:")
+   
     print("Clustering...")
     startTime = time.time()
     cluster_index = cfun.kmeans(num_clusters, word_vectors)
@@ -34,6 +34,7 @@ def main():
     
     clusterf = open("../../classifier/doc2vec/clusterIndex.pickle","wb") 
     
+    #Save clusters
     pickle.dump(cluster_index,clusterf)
     
     # create a word/index dictionary, mapping each vocabulary word to a cluster number
@@ -45,9 +46,13 @@ def main():
     test = pd.read_csv("../../data/testData.tsv",
                    header=0, delimiter="\t", quoting=3)
     
+    #Create feature vectors for training data
     trainingDataFV = np.zeros((train["review"].size, num_clusters), dtype=np.float)
     
+    #Create feature vectors for test data
     testDataFV = np.zeros((test["review"].size, num_clusters), dtype=np.float)
+    
+    #Populate feature vectors after cleaing the data
     
     print("Processing training data...")
     counter = 0
