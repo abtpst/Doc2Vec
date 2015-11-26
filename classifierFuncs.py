@@ -32,7 +32,7 @@ def create_bag_of_centroids(reviewData,num_clusters,index_word_map):
     
     return featureVector
 
-and here is the function for the classifier
+#and here is the function for the classifier
 def rfClassifer(n_estimators, trainingSet, label, testSet):
     
     logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
