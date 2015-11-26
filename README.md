@@ -22,11 +22,11 @@ I would recommend python 3.x but it works with python2.x as well
 
 i.	We start off by cleaning our data. This is similar to what we did for Word2Vec.
 
-Please go through the well documented `preproc.py`
+Please go through the well documented `dataCleanup.py`
 
 ii.	However, there is a second step. We need to format the data for Doc2Vec. This is where we provide tags to the reviews. Note that it is possible to have multiple tags for a piece of text.
 
-Please go through the well documented prep.py
+Please go through the well documented `prep.py`
 
 We tag each review as LABELED_(index) or UNLABELED_(index) where index is a unique identifier for that review. Later when we are testing our model, these unique tags will allow us to identify similar reviews. Additionally, we also tag the labeled reviews with their respective sentiment tag.
 
@@ -34,11 +34,11 @@ We tag each review as LABELED_(index) or UNLABELED_(index) where index is a uniq
 
 This is similar to what we did for Word2Vec, but with a slight modification. We are going to train our model 10 times. This will give us the benefits of cross validation. Cross validation is important as it ensures that our model is not dependent of the order in which the data is fed. During each iteration, we will shuffle our data and feed it to the model. We could have done this for Word2Vec as well.
 
-Please go through the well documented `train.py`
+Please go through the well documented `trainDoc2Vec.py`
 
 **c.	Testing and analyzing the model**
 
-`modtest.py` shows how to look into the model.
+`testDoc2Vec.py` shows how to look into the model.
 
 Let’s look at some of the results
 
@@ -83,6 +83,8 @@ Again, the more data we have, the better the model will be.
 
 Again we build a Randomforest classifier with K-means clustering.
 This is exactly the same as what we did for Word2Vec but with our Doc2Vec model
+
+`randomForestDoc2Vec.py the python script that does all of that classifierFuncs.py is the helper script for clustering and other functions`
 
 **e.	Evaluating the classifier**
  
