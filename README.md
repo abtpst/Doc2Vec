@@ -1,9 +1,24 @@
 # Doc2Vec
-Doc2Vec algorithm for solving moview review sentiment analysis
+
+I have prepared the code base to tackle the problem of sentiment analysis. I believe that the methods that I explore here can be modified to perform document tagging. Basically, both problems involve looking at a piece of text and categorizing it. We will look at binary sentiment analysis i.e. good or bad.
+
+The problem set is taken from
+
+https://www.kaggle.com/c/word2vec-nlp-tutorial
+
+The labeled data set consists of 50,000 IMDB movie reviews, specially selected for sentiment analysis. The sentiment of reviews is binary, meaning the IMDB rating < 5 results in a sentiment score of 0, and rating >=7 have a sentiment score of 1. No individual movie has more than 30 reviews. The 25,000 review labeled training set does not include any of the same movies as the 25,000 review test set. In addition, there are another 50,000 IMDB reviews provided without any rating labels.
 
 Doc2Vec is a neat implementation of Word2Vec. The difference here is that we can also assign tags to word vectors. This can be really useful when dealing with a multi-class tagging problem. Doc2Vec will not only give us insights into the relationships between words, but also the relationships between tags. Doc2Vec is a bit of overkill for a binary classification problem that we are exploring but let’s see how it does.
 
-a.	Preprocessing
+**Setup**
+
+I am using gensim for Doc2Vec implementation. Please install using
+
+https://radimrehurek.com/gensim/install.html
+
+I would recommend python 3.x but it works with python2.x as well
+
+**a.	Preprocessing**
 
 i.	We start off by cleaning our data. This is similar to what we did for Word2Vec.
 
@@ -15,13 +30,13 @@ Please go through the well documented prep.py
 
 We tag each review as LABELED_(index) or UNLABELED_(index) where index is a unique identifier for that review. Later when we are testing our model, these unique tags will allow us to identify similar reviews. Additionally, we also tag the labeled reviews with their respective sentiment tag.
 
-b.	Training the model
+**b.	Training the model**
 
 This is similar to what we did for Word2Vec, but with a slight modification. We are going to train our model 10 times. This will give us the benefits of cross validation. Cross validation is important as it ensures that our model is not dependent of the order in which the data is fed. During each iteration, we will shuffle our data and feed it to the model. We could have done this for Word2Vec as well.
 
 Please go through the well documented `train.py`
 
-c.	Testing and analyzing the model
+**c.	Testing and analyzing the model**
 
 `modtest.py` shows how to look into the model.
 
@@ -52,20 +67,23 @@ So we are looking for reviews similar to the ones which have the tag ‘0’ whi
 So, the reviewer gave this movie a score of 3/10 which means that this review would have been classified as a 0. That means our Doc2Vec model is correct in pointing out that this particular review , is close to the reviews tagged as 0.
 Again, the more data we have, the better the model will be.
 
-d.	Building the classifier
+**d.	Building the classifier**
 
 Again we build a Randomforest classifier with K-means clustering.
 This is exactly the same as what we did for Word2Vec but with our Doc2Vec model
 
-e.	Evaluating the classifier
+**e.	Evaluating the classifier**
  
 So this classifier does a little better than Word2Vec and gives me 84% accuracy. We can try tweaking the model parameters to see if we gain anything. 
 
 84% accuracy on a relatively small data set is not bad but it turns out that we can do better. The real gains of Word2Vec and Doc2Vec do not appear until we go into the Big Data realm. 
-Lessons
+
+**Lessons**
 
 1.	Training the Doc2Vec model for 10 epochs seems to have made the model better at deriving relationships. This is probably the reason why Doc2Vec needed a smaller vocabulary.
+
 2.	I noticed dramatic gains in accuracy when I decided to include numbers and smileys as valid tokens.
+
 3.	Modifying number of features, minimum word count, context window size and number of clusters can give visible changes in accuracy.
 
 
