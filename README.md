@@ -22,11 +22,11 @@ I would recommend python 3.x but it works with python2.x as well
 
 i.	We start off by cleaning our data. This is similar to what we did for Word2Vec.
 
-Please go through the well documented `dataCleanup.py`
+Please go through the well documented `dataCleanupDoc2Vec.py`
 
 ii.	However, there is a second step. We need to format the data for Doc2Vec. This is where we provide tags to the reviews. Note that it is possible to have multiple tags for a piece of text.
 
-Please go through the well documented `prep.py`
+Please go through the well documented `prepDoc2Vec.py`
 
 We tag each review as LABELED_(index) or UNLABELED_(index) where index is a unique identifier for that review. Later when we are testing our model, these unique tags will allow us to identify similar reviews. Additionally, we also tag the labeled reviews with their respective sentiment tag.
 
