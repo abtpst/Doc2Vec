@@ -53,6 +53,10 @@ model = doc2vec.Doc2Vec(size=num_features,
 #Build the model vocabulary (term document matrix)
 model.build_vocab(bagTaggedDocs)
 
+# If you don't plan to train the model any further, calling
+# init_sims will make the model much more memory-efficient
+model.init_sims(replace=True)
+
 #Train the model for 10 epochs
 for epoch in range(1,10):
     
